@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>午餐吃什么？</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    h1 {
+        margin-top: 50px;
+    }
+    #result {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<h1>午餐吃什么？</h1>
+<button onclick="chooseLunch()">我要吃什么？</button>
+<p id="result"></p>
+
+<script>
+var attempts = 3;
+var waitTime = 60000; // 1 minute in milliseconds
+var lastAttemptTime = 0;
+var isWaiting = false;
+
+function chooseLunch() {
+    var currentTime = Date.now();
+    
+    if (!isWaiting && (attempts > 0 || (currentTime - lastAttemptTime >= waitTime))) {
+        var menu = [
+            "牛肉面", "炒饭", "煎饺", "麻辣烫", "盖浇饭",
+            "披萨", "汉堡", "沙拉", "三明治", "寿司",
+            "拉面", "火锅", "饺子", "串串香", "烤肉",
+            "韩式拌饭", "意大利面", "烤鱼", "馄饨", "米饭配菜",
+            "粥", "素食沙拉", "墨西哥卷饼", "小龙虾", "蒸鱼",
+            "奶茶", "冷面", "海鲜炒饭", "羊肉串", "日式寿司",
+            "韩式烤肉", "咖喱饭", "牛排", "烧烤拼盘", "海鲜粥",
+            "酸辣粉", "酸菜鱼", "冒菜", "蒸蛋", "干锅",
+            "水饺", "鸡腿饭", "鱼火锅", "印度咖喱饭", "烤串",
+            "烤鸭", "蛋炒饭", "红烧肉", "麻辣香锅", "米饭",
+            "素食比萨", "拉面", "香锅", "河粉", "养生粥",
+            "咖喱鸡饭", "马来西亚餐", "精品火锅", "石锅拌饭",
+            "椒盐虾", "榴莲火锅", "芋圆", "椰汁西米露", "冰粉",
+            "豆浆油条", "桂林米粉", "老坛酸菜鱼", "水果盘", "水果沙拉",
+            "花甲粉", "椰子饭", "港式茶餐厅", "越南春卷", "烧卖",
+            "咖喱鸡饭", "越南牛肉粉", "培根蛋饭", "培根意面", "煎饼果子",
+            "老北京炸酱面", "肉夹馍", "凉皮", "肉串", "烧腊饭",
+            "草莓拼盘", "百果酥", "豆腐脑", "桂林米粉"
+        ];
+        
+        var choice = menu[Math.floor(Math.random() * menu.length)];
+        document.getElementById("result").textContent = "建议您： " + choice;
+        
+        if (attempts > 0) {
+            attempts--;
+        } else {
+            isWaiting = true;
+            setTimeout(function() {
+                attempts = 3;
+                isWaiting = false;
+            }, waitTime);
+        }
+        lastAttemptTime = currentTime;
+    } else {
+        document.getElementById("result").textContent = "这么挑，别吃了";
+    }
+}
+</script>
+</body>
+</html>
